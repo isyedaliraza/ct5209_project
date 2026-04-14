@@ -1,9 +1,6 @@
 package com.github.isyedaliraza.ct5209_project.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,4 +15,15 @@ public class Signature {
     private String name;
 
     private String email;
+
+    @ManyToOne
+    private Petition petition;
+
+    public Signature() {}
+
+    public Signature(String name, String email, Petition petition) {
+        this.name = name;
+        this.email = email;
+        this.petition = petition;
+    }
 }

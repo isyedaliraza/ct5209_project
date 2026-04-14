@@ -19,7 +19,7 @@ public class Petition {
 
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "petition", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Signature> signatures = new ArrayList<>();
 
     public Petition() {}
