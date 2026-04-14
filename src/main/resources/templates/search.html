@@ -4,10 +4,38 @@
 <div layout:fragment="content">
     <h2>Search Petition</h2>
 
-    <form method="get" th:action="@{/results}">
+    <form method="get" th:action="@{/search}">
         <input class="form-control mb-2" name="query" placeholder="Search...">
-        <button class="btn btn-primary">Search</button>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
+
+    <div th:if="${query}" class="pt-4">
+
+        <h4>
+            Results for: <span th:text="${query}"></span>
+        </h4>
+
+        <div th:if="${#lists.isEmpty(results)}" class="alert alert-warning">
+            No results found.
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4" th:each="petition : ${results}">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 th:text="${petition.title}"></h5>
+                        <p th:text="${petition.description}"></p>
+
+                        <a class="btn btn-sm btn-primary"
+                           th:href="@{'/petition/' + ${petition.id}}">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 </body>
 </html>

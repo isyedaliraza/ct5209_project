@@ -57,8 +57,15 @@ public class PetitionsController {
     }
 
     @GetMapping("/search")
-    public String search(Model model) {
+    public String search(@RequestParam(required = false) String query, Model model) {
         model.addAttribute("title", "Petitions | Search");
+
+        if (query != null && !query.isBlank()) {
+            List<PetitionDTO> results = petitionService.findByTitle(query);
+            model.addAttribute("results", results);
+            model.addAttribute("query", query);
+        }
+
         return "search";
     }
 }
