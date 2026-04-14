@@ -5,8 +5,10 @@ import com.github.isyedaliraza.ct5209_project.service.PetitionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,6 +31,29 @@ public class PetitionsController {
     public String create(Model model) {
         model.addAttribute("title", "Petitions | New");
         return "create";
+    }
+
+    @PostMapping("/create")
+    public String submit(@RequestParam String title, @RequestParam String description,
+                         RedirectAttributes redirectAttributes, Model model) {
+        String error = null;
+
+        if (title.isBlank()) {
+            error = "Title is required";
+        } else if (description.isBlank()) {
+            error = "Description is required";
+        }
+
+        if (error != null) {
+            model.addAttribute("error", error);
+            return "create";
+        }
+
+        petitionService.save(title, description);
+
+        redirectAttributes.addFlashAttribute(
+                "success", "Petition has been created.");
+        return "redirect:/";
     }
 
     @GetMapping("/search")
