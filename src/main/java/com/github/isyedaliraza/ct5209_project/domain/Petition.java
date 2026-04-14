@@ -21,4 +21,11 @@ public class Petition {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Signature> signatures = new ArrayList<>();
+
+    public Petition() {}
+
+    public Petition(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 }
