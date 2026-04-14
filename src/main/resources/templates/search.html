@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<body>
+<div layout:fragment="content">
+    <h2>Search Petition</h2>
+
+    <form method="get" th:action="@{/results}">
+        <input class="form-control mb-2" name="query" placeholder="Search...">
+        <button class="btn btn-primary">Search</button>
+    </form>
+</div>
+</body>
+</html>

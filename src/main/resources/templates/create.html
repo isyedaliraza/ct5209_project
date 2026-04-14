@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<body>
+<div layout:fragment="content">
+    <h2>Create Petition</h2>
+
+    <form method="post" th:action="@{/create}">
+        <input class="form-control mb-2" name="title" placeholder="Title" required>
+        <textarea class="form-control mb-2" name="description" placeholder="Description" required></textarea>
+        <button class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
