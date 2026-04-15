@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo "Deployed Successfully"
+                sh "docker build -f Dockerfile -t petitions ."
             }
         }
     }
