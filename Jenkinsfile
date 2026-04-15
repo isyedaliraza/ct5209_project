@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh "sudo docker build -f Dockerfile -t petitions ."
+                sh "docker build -f Dockerfile -t petitions ."
             }
         }
     }
