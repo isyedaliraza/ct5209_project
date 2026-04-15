@@ -17,7 +17,7 @@ pipeline {
 
     post {
         success {
-            archiveArtifacts allowEmptyArchive: true, artifacts: '**/ct5209_project*.war'
+            archiveArtifacts allowEmptyArchive: true, artifacts: '**/demo*.war'
         }
     }
 }
