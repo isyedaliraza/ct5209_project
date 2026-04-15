@@ -10,14 +10,14 @@ pipeline {
         stage('Build') {
             steps {
                 sh "mvn clean"
-                sh "mvn validate"
-                sh "mvn compile"
+                sh "mvn package"
             }
         }
-        stage('Execute') {
-            steps {
-                sh "mvn spring-boot:run"
-            }
+    }
+
+    post {
+        success {
+            archiveArtifacts allowEmptyArchive: true, artifacts: '**/ct5209_project*.war'
         }
     }
 }
