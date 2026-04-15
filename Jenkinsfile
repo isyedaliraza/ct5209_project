@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    parameters {
+        booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Do you want to deploy this build?')
+    }
+
     stages {
         stage('Fetch') {
             steps {
@@ -13,11 +17,15 @@ pipeline {
                 sh "mvn package"
             }
         }
-    }
-
-    post {
-        success {
-            archiveArtifacts allowEmptyArchive: true, artifacts: '**/demo*.war'
+        stage('Archive') {
+            steps {
+                archiveArtifacts allowEmptyArchive: true, artifacts: '**/demo.war'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo "The user manually approved? ${params.DEPLOY}"
+            }
         }
     }
 }
