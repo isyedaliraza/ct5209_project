@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    parameters {
-        booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Do you want to deploy this build?')
-    }
-
     stages {
         stage('Fetch') {
             steps {
@@ -22,9 +18,14 @@ pipeline {
                 archiveArtifacts allowEmptyArchive: true, artifacts: '**/demo.war'
             }
         }
+        stage('Approval') {
+            steps {
+                input message: 'Do you want to deploy this build?', ok: 'Deploy'
+            }
+        }
         stage('Deploy') {
             steps {
-                echo "The user manually approved? ${params.DEPLOY}"
+                echo "Deployed Successfully"
             }
         }
     }
