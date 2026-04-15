@@ -26,6 +26,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh "docker build -f Dockerfile -t petitions ."
+                sh 'docker rm -f "petitions-web" || true'
+                sh 'docker run --name "petitions-web" -p 8081:8080 -d petitions:latest'
             }
         }
     }
